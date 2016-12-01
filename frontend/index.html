@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browser Push</title>
+</head>
+
+<body>
+<header>
+  <h1>Browser Push</h1>
+</header>
+
+<p>
+  This library includes complete workout for implementing web push notifications for following major browsers. Please refer README for explanation. <br>
+  <ul>
+    <li>Chrome</li>
+    <li>Firefox</li>
+    <li>Opera</li>
+    <li>Safari</li>
+  </ul>
+</p>
+
+<p>
+  <div id="browser-details">
+    Browser detect script not finished yet.
+  </div>
+</p>
+
+<p>
+  Press following button to subscribe / un-subscribe for push notifications.
+  Keep developer console open to see logs when script is loading. Then click next action button<br><br>
+  <button onclick="inject()">Load script</button>
+  <button class="action-button">Script not loaded</button>
+</p>
+
+<script type="text/javascript">
+    /*
+     * Load script when button is pressed.
+     */
+     function inject() {
+       (
+           function (a,b,c,d) {
+             b.type= c;
+             b.src= d;
+             a.appendChild(b);
+       })
+       (document.getElementsByTagName('head')[0], document.createElement('script'), 'text/javascript', 'main.js');
+     }
+    /* Detect browser script. Grabbed from
+     * http://www.javascripter.net/faq/browsern.htm
+     */
+    var nVer = navigator.appVersion;
+    var nAgt = navigator.userAgent;
+    var browserName  = navigator.appName;
+    var fullVersion  = ''+parseFloat(navigator.appVersion);
+    var majorVersion = parseInt(navigator.appVersion,10);
+    var nameOffset,verOffset,ix;
+
+    // In Opera 15+, the true version is after "OPR/"
+    if ((verOffset=nAgt.indexOf("OPR/"))!=-1) {
+        browserName = "Opera";
+        fullVersion = nAgt.substring(verOffset+4);
+    }
+    // In older Opera, the true version is after "Opera" or after "Version"
+    else if ((verOffset=nAgt.indexOf("Opera"))!=-1) {
+        browserName = "Opera";
+        fullVersion = nAgt.substring(verOffset+6);
+        if ((verOffset=nAgt.indexOf("Version"))!=-1)
+            fullVersion = nAgt.substring(verOffset+8);
+    }
+    // In MSIE, the true version is after "MSIE" in userAgent
+    else if ((verOffset=nAgt.indexOf("MSIE"))!=-1) {
+        browserName = "Microsoft Internet Explorer";
+        fullVersion = nAgt.substring(verOffset+5);
+    }
+    // In Chrome, the true version is after "Chrome"
+    else if ((verOffset=nAgt.indexOf("Chrome"))!=-1) {
+        browserName = "Chrome";
+        fullVersion = nAgt.substring(verOffset+7);
+    }
+    // In Safari, the true version is after "Safari" or after "Version"
+    else if ((verOffset=nAgt.indexOf("Safari"))!=-1) {
+        browserName = "Safari";
+        fullVersion = nAgt.substring(verOffset+7);
+        if ((verOffset=nAgt.indexOf("Version"))!=-1)
+            fullVersion = nAgt.substring(verOffset+8);
+    }
+    // In Firefox, the true version is after "Firefox"
+    else if ((verOffset=nAgt.indexOf("Firefox"))!=-1) {
+        browserName = "Firefox";
+        fullVersion = nAgt.substring(verOffset+8);
+    }
+    // In most other browsers, "name/version" is at the end of userAgent
+    else if ( (nameOffset=nAgt.lastIndexOf(' ')+1) <
+        (verOffset=nAgt.lastIndexOf('/')) )
+    {
+        browserName = nAgt.substring(nameOffset,verOffset);
+        fullVersion = nAgt.substring(verOffset+1);
+        if (browserName.toLowerCase()==browserName.toUpperCase()) {
+            browserName = navigator.appName;
+        }
+    }
+    // trim the fullVersion string at semicolon/space if present
+    if ((ix=fullVersion.indexOf(";"))!=-1)
+        fullVersion=fullVersion.substring(0,ix);
+    if ((ix=fullVersion.indexOf(" "))!=-1)
+        fullVersion=fullVersion.substring(0,ix);
+
+    majorVersion = parseInt(''+fullVersion,10);
+    if (isNaN(majorVersion)) {
+        fullVersion  = ''+parseFloat(navigator.appVersion);
+        majorVersion = parseInt(navigator.appVersion,10);
+    }
+
+    document.getElementById("browser-details").innerHTML
+    =   ''
+        +'Browser name  = <em>'+browserName+'</em><br>'
+        +'Full version  = <em>'+fullVersion+'</em><br>'
+        +'Major version = <em>'+majorVersion+'</em><br>'
+        +'navigator.appName = <em>'+navigator.appName+'</em><br>'
+        +'navigator.userAgent = <em>'+navigator.userAgent+'</em><br>';
+</script>
+</body>
+</html>

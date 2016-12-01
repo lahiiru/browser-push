@@ -1,0 +1,19 @@
+Servlet 3.0 example project readme file
+---------------------------------------
+
+This project shows the usage of the following technologies:
+
+1. Servlet 3.0 annotation configuration
+2. Integration with legacy servlets (UrlRewriteFilter)
+3. commons-logging with log4j adapter
+4. Maven 2 Cargo plugin
+
+To start the project issue the following command:
+
+mvn package cargo:run
+
+Then try the following URL to see the URL rewrite at work:
+
+http://localhost:8080/example/old/123
+
+You should see /new/123 printed on the page.
