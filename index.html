@@ -1,45 +1,25 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="UTF-8">
     <title>Browser-push by lahiiru</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Browser-push</h1>
+      <h2 class="project-tagline">This repository contains complete workout for implementing web push notifications for major browsers</h2>
+      <a href="https://github.com/lahiiru/browser-push" class="btn">View on GitHub</a>
+      <a href="https://github.com/lahiiru/browser-push/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/lahiiru/browser-push/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-      <header>
-        <h1>Browser-push</h1>
-        <p>This repository contains complete workout for implementing web push notifications for major browsers</p>
-      </header>
-
-      <div id="banner">
-        <span id="logo"></span>
-
-        <a href="https://github.com/lahiiru/browser-push" class="button fork"><strong>View On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/lahiiru/browser-push/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/lahiiru/browser-push/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
-      </div><!-- end banner -->
-
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="push-notifications-for-your-webapp" class="anchor" href="#push-notifications-for-your-webapp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Push notifications for your webapp!</h1>
 
 <h2>
@@ -56,40 +36,148 @@
 
 <hr>
 
-<p>This repository contains two sections, <em>backend</em> and <em>frontend</em>.</p>
+<p>This tutorial uses Java in Back-end and JavaScript in front-end. Source code can be downloaded from top of this site. The code is written for demonstration purpose and you have to learn and modify the code to use in your production environment.  Follow the steps below to configure web push notifications.</p>
+</li>
+</ul>
+
+<h2>
+<a id="what-is-a-web-push-notification" class="anchor" href="#what-is-a-web-push-notification" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is a web push notification?</h2>
+
+<p><img src="https://github.com/lahiiru/browser-push/raw/gh-pages/pushondesk.png" alt="Push notification"></p>
+
+<p><strong>Mobile push notifications</strong> can be sent from your back-end to some device owner's notification service such as Google's <a href="https://firebase.google.com/docs/cloud-messaging">FCM</a> or Apple's <a href="https://developer.apple.com/notifications">APNS</a>. Whenever the receiver device has the internet connectivity, pending messages are fetched from device owner's notification service and displayed to the user. To do this, your message recipient should have installed a push notification enabled mobile application given by you. <strong>Web push notifications</strong> or browser push notifications are somewhat different. Those are delivered to a web browser. Message recipient should have allowed notifications for your webapp or website by visiting the url from a push notification supported browser. It's the time for sending push notifications to your webapp visitors.</p>
+
+<h2>
+<a id="lets-start" class="anchor" href="#lets-start" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Let's start</h2>
+
+<p>You can download the source code related to this tutorial from below or clicking the link at the top of this page. Feel free to contribute to the repository.</p>
+
+<blockquote>
+<p>Source code: <a href="https://github.com/lahiiru/browser-push">Browser-push</a></p>
+</blockquote>
+
+<p>If you are not willing to send notifications for Safari users, you can skip almost all the steps <g-emoji alias="smile" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f604.png" ios-version="6.0">😄</g-emoji>. Safari doesn't support <a href="https://w3c.github.io/push-api/">Push API</a> which is the W3C standard for web push notification protocol yet. But Chrome, Firefox and Opera latest versions has nicely done that. Therefore, we have to handle Safari separately while other all browsers can be considered as one. Let's say Safari and non-Safari. <img class="emoji" title=":trollface:" alt=":trollface:" src="https://assets-cdn.github.com/images/icons/emoji/trollface.png" height="20" width="20" align="absmiddle"></p>
+
+<hr>
+
+<h2>
+<a id="1-preparing-client-side-scripts" class="anchor" href="#1-preparing-client-side-scripts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1. Preparing client-side scripts</h2>
+
+<h3>
+<a id="guide-lines" class="anchor" href="#guide-lines" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Guide lines</h3>
+
+<ol>
+<li>Browse <code>front-end/keygen.html</code>. Generate and note down the keys.</li>
+<li>Set <code>const applicationServerPublicKey</code> value<br>
+in <code>front-end/sw.js</code> and <code>front-end/main.js</code> using generated server public key.</li>
+<li>Now your client-side scripts are ready to test on non-safari browsers.</li>
+<li>
+<p>Open <code>front-end/index.html</code> in browser. Press <strong>Load script</strong> button then <strong>Enable Push Messaging</strong>. An input box will appear. Note down the JSON string from there as user subscription.</p>
+
+<blockquote>
+<p>This JSON object is called user subscription. In production environment, you should send this subscription to your backen-end and it should be persisted against some user identification. Later your back-end will use that user subscription objects to send push notifications to subscribed users. For demonstration purpose, you can copy it now and hard code in server code.</p>
+</blockquote>
+</li>
+</ol>
+
+<p><strong>If you need to send notifications to Safari browser, following additional steps are needed.</strong></p>
+
+<ol>
+<li>Create certificates and a website push id for your domain from Apple developer site. Refer <em>Registering with Apple</em> section in <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/PushNotifications/PushNotifications.html#//apple_ref/doc/uid/TP40013225-CH3-SW33">Configuring Safari Push Notifications</a> article.</li>
+<li>
+<p>Replace the <code>var domain</code> value in <code>front-end/main.js</code> with your website push id. It will look like <code>web.com.example</code></p>
+
+<p>Then you need to setup a RESTful web service which will be called every time some Safari user is trying to subscribe for your webapp. Therefore, Safari push notification protocol needs 3 components to work together as following figure.</p>
+
+<p><img src="https://github.com/lahiiru/browser-push/raw/gh-pages/handshake_2x.png" alt="Safari-handshake"></p>
+
+<p>In above diagram, pink color box <em>Returns push package</em> needs to be done by our RESTful web service. <em>Push package</em> is a zip file which contains some files and it's hashes. Although Apple developer page instructs to build the <em>Push package</em> dynamically, in our implementation we will create it once and RESTful service will serve it as a static resource.</p>
 </li>
 <li>
-<p>Backend</p>
+<p>Navigate to <code>back-end/safari_push_package_creator/pushPackage.raw/</code>.<br>
+Modify the files as you needed. Please refer the <em>Building the Push Package</em> section in <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/PushNotifications/PushNotifications.html#//apple_ref/doc/uid/TP40013225-CH3-SW7">Configuring Safari Push Notifications</a> article.</p>
+
+<blockquote>
+<p>If you are planing to add Safari push notification support to multiple domain names, specify those as <strong>"allowedDomains"</strong><br>
+in <code>back-end/safari_push_package_creator/pushPackage.raw/website.json</code>.<br>
+Parameter <strong>"webServiceURL"</strong> specifies the path where the Safari RESTful service will be deployed at. <strong>authenticationToken</strong> will be not using to identify users in our implementation. So keep it as it is. Further, you can have your own iconset.</p>
+</blockquote>
+</li>
+<li><p>Set <code>$certificate_path, $certificate_password</code> variables<br>
+in <code>back-end\safari_push_package_creator\index.php</code> to match your <em>.p12</em> certificate.</p></li>
+<li>Run that php file.
+<code>shell
+&gt; php index.php
+</code>
+</li>
+<li>Then a push package for your webapp will be created at following path<br>
+back-end/safari_webservice_backend/binaries/push-package.zip`</li>
+<li>Now make the <code>push-api.war</code> by packaging project <code>safari_webservice_backend</code>.
+<code>shell
+&gt; mvn package
+</code>
+</li>
+<li>Deploy the <strong>push-api.war</strong> file in Tomcat or other container. After the deployment, <strong>"webServiceURL"</strong> specified in <strong>website.json</strong> should matches the context path of deployed web application.<br>
+If everything works fine, 
 
 <ul>
-<li>Universal push notification sender
-&gt; This project helps to send push notifications for subscribed users</li>
-<li>Safari push package creator
-&gt; Safari needs to create an archive called push package for your website. This project creates push package for your website.</li>
-<li>Safari web service backend
-&gt; Safari push notification service needs a RESTful web service for your website to serve push packages and to log errors.</li>
+<li>
+<code>http://webServiceURL/v1/</code> should response with <code>BAD REQUEST</code>
+</li>
+<li>
+<code>http://pushPackages/v1/web.com.example</code> should download zip file <code>push-package.bin</code>.</li>
 </ul>
 </li>
-<li>Frontend
+<li>Now you can test Safari push notifications using <code>front-end/index.html</code>.</li>
+<li>A confirmation box should be displayed when <strong>Load script</strong> button is clicked. Otherwise, check developer console outputs. If output is printed with <code>deviceToken=null</code>, this is a problem of your safari RESTful service or created push package. See push-api.war logs for troubleshooting.</li>
+<li>
+<p>If everything works fine, input box with device a should be appeared. Note down it as Safari subscription. It is needed when sending notifications.</p>
 
-<ul>
-<li>sw.js
-&gt; This file implements a service worker to receive push notifications. This is needed for web browsers which have implemented <a href="https://w3c.github.io/push-api/">Push API</a>
+<blockquote>
+<p>In production environment, you should send this subscription to your backen-end and it should be persisted against some user identification. Later your back-end will use that user subscription objects to send push notifications to subscribed users. For demonstration purpose, you can copy it now and hard code in server code.</p>
+</blockquote>
 </li>
-<li>main.js
-&gt; This script helps to subscribe or un-subscribe users to receive push notifications by asking permissions.</li>
-<li>index.html
-&gt; Demo html website which can be used to test web push notification.</li>
-</ul>
+</ol>
+
+<h3>
+<a id="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>References</h3>
+
+<p><strong>If you encounter any problem with above guide lines, following resources from original authors will be helpful.</strong></p>
+
+<ol>
+<li>Architecture of the Push Framework as described in <a href="https://w3c.github.io/push-api">W3C draft</a> 
+<img src="https://github.com/lahiiru/browser-push/raw/gh-pages/sequence_diagram.png" alt="Push Framework sequence diagram">
 </li>
-</ul>
-      </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/lahiiru">lahiiru</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+<li>Architecture of the <a href="https://github.com/lahiiru/browser-push/raw/gh-pages/safari_notifs_rev_2x.png">Safari push notification framework</a>
+</li>
+<li>Original <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/CompanionFile.zip">createPushPackage.php</a> from developer.apple.com</li>
+</ol>
+
+<hr>
+
+<h2>
+<a id="2-sending-push-notifications-for-subscribed-users" class="anchor" href="#2-sending-push-notifications-for-subscribed-users" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Sending push notifications for subscribed users</h2>
+
+<h3>
+<a id="guide-lines-1" class="anchor" href="#guide-lines-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Guide lines</h3>
+
+<ol>
+<li>Navigate to <code>universal_web_notification_sender</code> project. Set previously generated (in Step 1.1) server keys in <code>PushServerVars.java</code>.</li>
+<li>Add your non-Safari subscription in <code>Sender.java</code> as follows.
+<code>JAVA
+PushSubscription nonSuffariSubscription = new PushSubscription( "subscriptionJSON" )
+</code>
+</li>
+</ol>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/lahiiru/browser-push">Browser-push</a> is maintained by <a href="https://github.com/lahiiru">lahiiru</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+
+    </section>
+
+  
   </body>
 </html>
