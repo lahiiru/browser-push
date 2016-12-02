@@ -76,12 +76,14 @@
 <p>Source code: <a href="https://github.com/lahiiru/browser-push">Browser-push</a></p>
 </blockquote>
 
-<p>If you are not willing to send notifications for Safari users, you can skip almost all the steps <g-emoji alias="smile" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f604.png" ios-version="6.0">😄</g-emoji>. Safari doesn't support <a href="https://w3c.github.io/push-api/">Push API</a> which is the W3C standard for web push notification protocol yet. But Chrome, Firefox and Opera latest versions has nicely done that. Therefore, we have to handle Safari separately while other all browsers can be considered as one. Let's say Safari and non-Safari. <img class="emoji" title=":trollface:" alt=":trollface:" src="https://assets-cdn.github.com/images/icons/emoji/trollface.png" height="20" width="20" align="absmiddle"></p>
+<p>If you are not willing to send notifications for Safari users, you can skip almost all the steps <g-emoji alias="smile" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f604.png" ios-version="6.0">😄</g-emoji>. Safari doesn't support <a href="https://w3c.github.io/push-api/">Push API</a> which is the W3C standard for web push notification protocol yet. But Chrome, Firefox and Opera latest versions has nicely done that. Therefore, we have to handle Safari separately while other all browsers can be considered as one. Let's say Safari and non-Safari.</p>
 
 <hr>
 
 <h2>
 <a id="1-preparing-client-side-scripts" class="anchor" href="#1-preparing-client-side-scripts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1. Preparing client-side scripts</h2>
+
+<p>Open the project in IntelliJ IDEA.</p>
 
 <h3>
 <a id="guide-lines" class="anchor" href="#guide-lines" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Guide lines</h3>
@@ -168,8 +170,7 @@ If everything works fine,
 <p><strong>If you encounter any problem with above guide lines, following resources from the original authors will be helpful.</strong></p>
 
 <ul>
-<li>Architecture of the Push Framework as described in <a href="https://w3c.github.io/push-api">W3C draft</a> 
-<img src="https://github.com/lahiiru/browser-push/raw/gh-pages/sequence_diagram.png" alt="Push Framework sequence diagram">
+<li>Architecture of the Push Framework is described in <a href="https://w3c.github.io/push-api">W3C draft</a>
 </li>
 <li>Architecture of the <a href="https://github.com/lahiiru/browser-push/raw/gh-pages/safari_notifs_rev_2x.png">Safari push notification framework</a>
 </li>
