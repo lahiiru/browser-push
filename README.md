@@ -11,7 +11,7 @@ This repository contains and explains necessary steps to configure web push noti
  
 ## Tutorial
 
-Visit Github page[Browser-push](https://lahiiru.github.io/browser-push) for guide lines.
+Visit Github page [Browser-push](https://lahiiru.github.io/browser-push) for guide lines.
 
 ---
 lahiiru@gmail.com
