@@ -94,7 +94,8 @@ in <code>front-end/sw.js</code> and <code>front-end/main.js</code> using generat
 <li>
 <p>Open <code>front-end/index.html</code> in browser <strong>using any HTTP Server</strong>. You should be able to access to index.html from similar url as following.<br>
 <code>http://localhost:65124/browser-push/front-end/index.html</code><br>
-DNS should be <strong>localhost</strong>. Otherwise, it should be <strong>HTTPS://</strong> Press <strong>Load script</strong> button then <strong>Enable Push Messaging</strong>. An input box will appear. Note down the JSON string from there as user subscription.</p>
+DNS should be <strong>localhost</strong>. Otherwise, it should be <strong>https://</strong><br>
+Press <strong>Load script</strong> button then <strong>Enable Push Messaging</strong>. An input box will appear. Note down the JSON string from there as user subscription.</p>
 
 <blockquote>
 <p>This JSON object is called user subscription. In production environment, you should send this subscription to your backen-end and it should be persisted against some user identification. Later your back-end will use that user subscription objects to send push notifications to subscribed users. For demonstration purpose, you can copy it now and hard code in server code.</p>
