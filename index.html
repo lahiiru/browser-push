@@ -1,25 +1,45 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+<html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Browser-push by lahiiru</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
-    <section class="page-header">
-      <h1 class="project-name">Browser-push</h1>
-      <h2 class="project-tagline">This repository contains complete workout for implementing web push notifications for major browsers</h2>
-      <a href="https://github.com/lahiiru/browser-push" class="btn">View on GitHub</a>
-      <a href="https://github.com/lahiiru/browser-push/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/lahiiru/browser-push/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
 
-    <section class="main-content">
-      <h1>
+      <header>
+        <h1>Browser-push</h1>
+        <p>This repository contains complete workout for implementing web push notifications for major browsers</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/lahiiru/browser-push" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/lahiiru/browser-push/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/lahiiru/browser-push/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
 <a id="push-notifications-for-your-webapp" class="anchor" href="#push-notifications-for-your-webapp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Push notifications for your webapp!</h1>
 
 <h2>
@@ -29,7 +49,7 @@
 
 <ul>
 <li>Chrome 49+</li>
-<li>Firefox 51+</li>
+<li>Firefox 52+</li>
 <li>Opera 42+</li>
 <li>
 <p>Safari 10+</p>
@@ -122,10 +142,10 @@ If everything works fine,
 
 <ul>
 <li>
-<code>http://webServiceURL/v1/</code> should response with <code>BAD REQUEST</code>
+<code>http://webServiceURL/v1/</code> should response with <strong>BAD REQUEST</strong>
 </li>
 <li>
-<code>http://pushPackages/v1/web.com.example</code> should download zip file <code>push-package.bin</code>.</li>
+<code>http://pushPackages/v1/web.com.example</code> should download zip file <strong>push-package.bin</strong>.</li>
 </ul>
 </li>
 <li>Now you can test Safari push notifications using <code>front-end/index.html</code>.</li>
@@ -142,7 +162,7 @@ If everything works fine,
 <h3>
 <a id="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>References</h3>
 
-<p><strong>If you encounter any problem with above guide lines, following resources from original authors will be helpful.</strong></p>
+<p><strong>If you encounter any problem with above guide lines, following resources from the original authors will be helpful.</strong></p>
 
 <ol>
 <li>Architecture of the Push Framework as described in <a href="https://w3c.github.io/push-api">W3C draft</a> 
@@ -151,6 +171,8 @@ If everything works fine,
 <li>Architecture of the <a href="https://github.com/lahiiru/browser-push/raw/gh-pages/safari_notifs_rev_2x.png">Safari push notification framework</a>
 </li>
 <li>Original <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/CompanionFile.zip">createPushPackage.php</a> from developer.apple.com</li>
+<li>Nice tutorial from Google, <a href="https://developers.google.com/web/fundamentals/getting-started/codelabs/push-notifications/">Push Codelab</a>
+</li>
 </ol>
 
 <hr>
@@ -162,7 +184,7 @@ If everything works fine,
 <a id="guide-lines-1" class="anchor" href="#guide-lines-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Guide lines</h3>
 
 <ol>
-<li>Navigate to <code>universal_web_notification_sender</code> project. Set previously generated (in Step 1.1) server keys in <code>PushServerVars.java</code>.</li>
+<li>Navigate to <strong>universal_web_notification_sender</strong> project. Set previously generated (in Step 1.1) server keys in <code>PushServerVars.java</code>.</li>
 <li>
 <p>Add your subscriptions in <code>Sender.java</code> as follows.</p>
 
@@ -176,7 +198,7 @@ If everything works fine,
 
 <ol>
 <li>
-<p>Place your <strong>.cer file</strong> (i.e apn_developer_identity.cer), <strong>.p12 file</strong> (i.e. private_dev_key.p12) and <strong>.certSigningRequest</strong> (i.e CertificateSigningRequest.certSigningRequest) in same directory and execute following commands to create <strong>apn_developer_identity.p12</strong></p>
+<p>Place your <strong>.cer file</strong> (i.e apn_developer_identity.cer), <strong>.p12 file</strong> (i.e. private_dev_key.p12) and <strong>.certSigningRequest</strong> (i.e CertificateSigningRequest.certSigningRequest) in same directory and execute following commands to create <strong>apn_developer_identity.p12</strong>.</p>
 
 <pre lang="dos"><code>openssl x509 -in apn_developer_identity.cer -inform DER -out apn_developer_identity.pem -outform PEM}
 openssl pkcs12 -nocerts -out private_dev_key.pem -in private_dev_key.p12
@@ -184,18 +206,37 @@ openssl rsa -out private_key_noenc.pem -in private_dev_key.pem
 openssl pkcs12 -export -in apn_developer_identity.pem -inkey private_key_noenc.pem -certfile CertificateSigningRequest.certSigningRequest -name "apn_developer_identity" -out apn_developer_identity.p12
 </code></pre>
 </li>
+<li><p>Place your <strong>apn_developer_identity.p12</strong> in <strong>universal_web_notification_sender</strong> project root.</p></li>
+<li>Change your certificate passkey in <code>private static void sendToSafari()</code> method in <code>Sender.java</code> class.</li>
+<li>Uncomment <code>sendToSafari(safariSubscription, safariPayload);</code> line<br>
+in <code>public static void main(String[] args)</code> method in <code>Sender.java</code> class.</li>
+<li>Sample notification should be delivered to your Safari when you run <code>Sender.java</code> class.</li>
 </ol>
 
-<p>2.</p>
+<h3>
+<a id="references-1" class="anchor" href="#references-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>References</h3>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/lahiiru/browser-push">Browser-push</a> is maintained by <a href="https://github.com/lahiiru">lahiiru</a>.</span>
+<p><strong>If you encounter any problem with above guide lines, following resources from the original authors will be helpful.</strong></p>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+<ol>
+<li>
+<a href="https://github.com/web-push-libs">web-push-libs</a>, <a href="https://github.com/MartijnDwars/web-push">MartijnDwars/web-push</a> for sending push notifications to non-Safari browsers.</li>
+<li>
+<a href="https://github.com/jpoz/APNS">jpoz/APNS</a> and <a href="https://github.com/notnoop/java-apns">notnoop/java-apns</a> for sending notifications to Safari.</li>
+<li>Some online demo sites, <a href="https://gauntface.github.io/simple-push-demo/">simple-push-demo</a>, <a href="https://github.com/gauntface/simple-push-demo">simple-push-demo-repo</a>
+</li>
+<li>A free third party service does all of above things, <a href="https://onesignal.com">OneSignal</a>
+</li>
+</ol>
+
+<hr>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/lahiiru">lahiiru</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
-
-    </section>
-
-  
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
