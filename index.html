@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Browser-push by lahiiru</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Browser-push</h1>
+        <p>This repository contains complete workout for implementing web push notifications for major browsers</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/lahiiru/browser-push" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/lahiiru/browser-push/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/lahiiru/browser-push/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a id="push-notifications-for-your-webapp" class="anchor" href="#push-notifications-for-your-webapp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Push notifications for your webapp!</h1>
+
+<h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>This repository contains and explains necessary steps to configure web push notifications for your webapp on Safari and <a href="https://w3c.github.io/push-api/">Push API</a> supported browsers as listed below:</p>
+
+<ul>
+<li>Chrome 49+</li>
+<li>Firefox 51+</li>
+<li>Opera 42+</li>
+<li>
+<p>Safari 10+</p>
+
+<hr>
+
+<p>This repository contains two sections, <em>backend</em> and <em>frontend</em>.</p>
+</li>
+<li>
+<p>Backend</p>
+
+<ul>
+<li>Universal push notification sender
+&gt; This project helps to send push notifications for subscribed users</li>
+<li>Safari push package creator
+&gt; Safari needs to create an archive called push package for your website. This project creates push package for your website.</li>
+<li>Safari web service backend
+&gt; Safari push notification service needs a RESTful web service for your website to serve push packages and to log errors.</li>
+</ul>
+</li>
+<li>Frontend
+
+<ul>
+<li>sw.js
+&gt; This file implements a service worker to receive push notifications. This is needed for web browsers which have implemented <a href="https://w3c.github.io/push-api/">Push API</a>
+</li>
+<li>main.js
+&gt; This script helps to subscribe or un-subscribe users to receive push notifications by asking permissions.</li>
+<li>index.html
+&gt; Demo html website which can be used to test web push notification.</li>
+</ul>
+</li>
+</ul>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/lahiiru">lahiiru</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
