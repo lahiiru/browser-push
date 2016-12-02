@@ -88,13 +88,11 @@ function package_raw_data($package_dir) {
 // Creates the push package, and returns the path to the archive.
 function create_push_package() {
     global $certificate_path, $certificate_password;
-    @mkdir('output');
+    @mkdir('..\safari_webservice_backend\binaries');
     // Create a temporary directory in which to assemble the push package
-    $package_dir = 'output\pushPackage' . time();
-    if (!mkdir($package_dir)) {
-        unlink($package_dir);
-        die;
-    }
+    $package_dir = '..\safari_webservice_backend\binaries\push-package';
+
+    @mkdir($package_dir);
 
     copy_raw_push_package_files($package_dir);
     create_manifest($package_dir);

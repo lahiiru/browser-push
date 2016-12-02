@@ -1,6 +1,8 @@
 'use strict';
-
-const applicationServerPublicKey = 'BGY-Duuc0BhFzINRJU9jdwPHR4dbqUQf6pw88WCR7SBuJMBe3qQ5i5v8_90tt4llkn_GyG2a4lkbzjyMQFxdBh4';
+/*
+ * Visit Github page[Browser-push](https://lahiiru.github.io/browser-push) for guide lines.
+ */
+const applicationServerPublicKey = '<paste-generated-public-key-here>';
 
 var domain = "web.tech.lahiru";
 var ua = window.navigator.userAgent,
@@ -98,6 +100,7 @@ function subscribe() {
     });
 }
 
+// For safari
 function requestPermissions() {
     window.safari.pushNotification.requestPermission('https://apps.wearetrying.info/push-api', domain, {}, function(subscription) {
         console.log(subscription);
@@ -129,6 +132,7 @@ function nonSafariInit(){
     }
 }
 
+// For safari
 function safariIniti() {
     var pResult = window.safari.pushNotification.permission(domain);
     

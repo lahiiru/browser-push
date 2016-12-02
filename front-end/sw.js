@@ -1,10 +1,11 @@
 /* eslint-env browser, serviceworker, es6 */
-
 'use strict';
-
+/*
+ * Visit Github page[Browser-push](https://lahiiru.github.io/browser-push) for guide lines.
+ */
 /* eslint-disable max-len */
 
-const applicationServerPublicKey = 'BGY-Duuc0BhFzINRJU9jdwPHR4dbqUQf6pw88WCR7SBuJMBe3qQ5i5v8_90tt4llkn_GyG2a4lkbzjyMQFxdBh4';
+const applicationServerPublicKey = '<paste-generated-public-key-here>';
 
 /* eslint-enable max-len */
 
@@ -43,7 +44,7 @@ self.addEventListener('notificationclick', function(event) {
     event.notification.close();
 
     event.waitUntil(
-        clients.openWindow('https://developers.google.com/web/')
+        clients.openWindow('https://github.com/lahiiru/browser-push')
     );
 });
 

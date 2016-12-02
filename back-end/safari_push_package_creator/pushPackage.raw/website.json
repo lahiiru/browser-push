@@ -1,0 +1,8 @@
+{
+    "websiteName": "Safari Push Demo",
+    "websitePushID": "web.tech.lahiru",
+    "allowedDomains": ["https://lahiru.tech","http://lahiru.tech"],
+    "urlFormatString": "https://lahiru.tech/%@",
+    "authenticationToken": "19f8d7a6e9fb8a7f6d9330dabe",
+    "webServiceURL": "https://apps.wearetrying.info/push-api"
+}
