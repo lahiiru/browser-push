@@ -83,7 +83,7 @@ in <code>front-end/sw.js</code> and <code>front-end/main.js</code> using generat
 <p><strong>If you need to send notifications to Safari browser, following additional steps are needed.</strong></p>
 
 <ol>
-<li>Create certificates and a website push id for your domain from Apple developer site. Refer <em>Registering with Apple</em> section in <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/PushNotifications/PushNotifications.html#//apple_ref/doc/uid/TP40013225-CH3-SW33">Configuring Safari Push Notifications</a> article.</li>
+<li>Create certificates (.p12 and .cer) and a website push id for your domain from Apple developer site. Refer <em>Registering with Apple</em> section in <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/PushNotifications/PushNotifications.html#//apple_ref/doc/uid/TP40013225-CH3-SW33">Configuring Safari Push Notifications</a> article.</li>
 <li>
 <p>Replace the <code>var domain</code> value in <code>front-end/main.js</code> with your website push id. It will look like <code>web.com.example</code></p>
 
@@ -163,12 +163,30 @@ If everything works fine,
 
 <ol>
 <li>Navigate to <code>universal_web_notification_sender</code> project. Set previously generated (in Step 1.1) server keys in <code>PushServerVars.java</code>.</li>
-<li>Add your non-Safari subscription in <code>Sender.java</code> as follows.
-<code>JAVA
-PushSubscription nonSuffariSubscription = new PushSubscription( "subscriptionJSON" )
-</code>
+<li>
+<p>Add your subscriptions in <code>Sender.java</code> as follows.</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">PushSubscription</span> nonSuffariSubscription <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">PushSubscription</span>( <span class="pl-s"><span class="pl-pds">"</span>subscriptionJson<span class="pl-pds">"</span></span> )
+<span class="pl-smi">String</span> suffariSubscription <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>subscriptionToken<span class="pl-pds">"</span></span>;</pre></div>
+</li>
+<li>Sample notification should be delivered to your browser when you run <code>Sender.java</code> class.</li>
+</ol>
+
+<p><strong>If you need to send notifications to Safari browser, following additional steps are needed.</strong></p>
+
+<ol>
+<li>
+<p>Place your <strong>.cer file</strong> (i.e apn_developer_identity.cer), <strong>.p12 file</strong> (i.e. private_dev_key.p12) and <strong>.certSigningRequest</strong> (i.e CertificateSigningRequest.certSigningRequest) in same directory and execute following commands to create <strong>apn_developer_identity.p12</strong></p>
+
+<pre lang="dos"><code>openssl x509 -in apn_developer_identity.cer -inform DER -out apn_developer_identity.pem -outform PEM}
+openssl pkcs12 -nocerts -out private_dev_key.pem -in private_dev_key.p12
+openssl rsa -out private_key_noenc.pem -in private_dev_key.pem
+openssl pkcs12 -export -in apn_developer_identity.pem -inkey private_key_noenc.pem -certfile CertificateSigningRequest.certSigningRequest -name "apn_developer_identity" -out apn_developer_identity.p12
+</code></pre>
 </li>
 </ol>
+
+<p>2.</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/lahiiru/browser-push">Browser-push</a> is maintained by <a href="https://github.com/lahiiru">lahiiru</a>.</span>
