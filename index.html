@@ -74,7 +74,7 @@
 <p>Source code: <a href="https://github.com/lahiiru/browser-push">Browser-push</a></p>
 </blockquote>
 
-<p>If you are not willing to send notifications for Safari users, you can skip almost all the steps <g-emoji alias="smile" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f604.png" ios-version="6.0">😄</g-emoji>. Safari doesn't support <a href="https://w3c.github.io/push-api/">Push API</a> which is the W3C standard for web push notification protocol yet. But Chrome, Firefox and Opera latest versions has nicely done that. Therefore, we have to handle Safari separately while other all browsers can be considered as one. Let's say Safari and non-Safari.</p>
+<p>If you are not willing to send notifications for Safari users, you can skip almost all the steps. Safari doesn't support <a href="https://w3c.github.io/push-api/">Push API</a> which is the W3C standard for web push notification protocol yet. But Chrome, Firefox and Opera latest versions has nicely done that. Therefore, we have to handle Safari separately while other all browsers can be considered as one. Let's say Safari and non-Safari.</p>
 
 <hr>
 
@@ -103,7 +103,7 @@ Press <strong>Load script</strong> button then <strong>Enable Push Messaging</st
 </li>
 </ol>
 
-<p><strong>If you need to send notifications to Safari browser, following additional steps are needed.</strong></p>
+<p><strong>Following steps are needed for Safari only. If you wish to send notifications for a non-Safari browser, move to <a href="#2-sending-push-notifications-for-subscribed-users">next section</a></strong></p>
 
 <ol>
 <li>Create certificates (.p12 and .cer) and a website push id for your domain from Apple developer site. Refer <em>Registering with Apple</em> section in <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/PushNotifications/PushNotifications.html#//apple_ref/doc/uid/TP40013225-CH3-SW33">Configuring Safari Push Notifications</a> article.</li>
