@@ -88,14 +88,21 @@
 
 <ol>
 <li>First you need to generate an <strong>elliptic curve public–private key pair</strong> (a public-key cryptosystems like old RSA). This key pair is for identification of your back-end service which will be used later to send notifications. This identification process is called <a href="https://tools.ietf.org/html/draft-ietf-webpush-vapid-01">VAPID</a>. You can use <code>front-end/keygen.html</code> to generate a key pair. Generate and note down the VAPID keys.</li>
-<li>Replace the <code>const applicationServerPublicKey</code> variable value
-in <code>front-end/sw.js</code> and <code>front-end/main.js</code> with generated server public key.</li>
-<li>Now your client-side scripts are ready to test on non-safari browsers.</li>
+<li>
+<p>Put the generated public key in following files as below. <strong>N.B.</strong> File path and name is commented at the top of the code block.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// front-end/sw.js</span>
+<span class="pl-k">const</span> <span class="pl-c1">applicationServerPublicKey</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;your-generated-public-key&gt;<span class="pl-pds">"</span></span>;</pre></div>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// front-end/main.js</span>
+<span class="pl-k">const</span> <span class="pl-c1">applicationServerPublicKey</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;your-generated-public-key&gt;<span class="pl-pds">"</span></span>;</pre></div>
+</li>
+<li><p>Now your client-side scripts are ready to test on non-safari browsers. You should add <strong>main.js</strong> to your web page as a script. It will register <strong>sw.js</strong> as a <a href="https://www.w3.org/TR/service-workers">service worker</a>.</p></li>
 <li>
 <p>Open <code>front-end/index.html</code> in browser <strong>using any HTTP Server</strong>. You should be able to access to index.html from similar url as following.<br>
 <code>http://localhost:65124/browser-push/front-end/index.html</code><br>
 DNS should be <strong>localhost</strong>. Otherwise, it should be <strong>https://</strong><br>
-Press <strong>Load script</strong> button then <strong>Enable Push Messaging</strong>. An input box will appear. Note down the JSON string from there as user subscription.</p>
+Press <strong>Load Script</strong> button to inject <strong>main.js</strong> script. (instead, you can simply add <strong>main.js</strong> to the head section of the web page). After press <strong>Enable Push Messaging</strong> to subscribe for push notificatons. An input box will appear. Note down the JSON string.</p>
 
 <blockquote>
 <p>This JSON object is called user subscription. In production environment, you should send this subscription to your backen-end and it should be persisted against some user identification. Later your back-end will use that user subscription objects to send push notifications to subscribed users. For demonstration purpose, you can copy it now and hard code in server code.</p>
@@ -108,13 +115,20 @@ Press <strong>Load script</strong> button then <strong>Enable Push Messaging</st
 <ol>
 <li>Create certificates (.p12 and .cer) and a website push id for your domain from Apple developer site. Refer <em>Registering with Apple</em> section in <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/PushNotifications/PushNotifications.html#//apple_ref/doc/uid/TP40013225-CH3-SW33">Configuring Safari Push Notifications</a> article.</li>
 <li>
-<p>Replace the <code>var domain</code> value in <code>front-end/main.js</code> with your website push id. It will look like <code>web.com.example</code></p>
+<p>Add your website push id which will look like <code>web.com.example</code> to the code as below.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// front-end/main.js</span>
+<span class="pl-k">var</span> domain <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>web.com.example<span class="pl-pds">"</span></span>;</pre></div>
 
 <p>Then you need to setup a RESTful web service which will be called every time some Safari user is trying to subscribe for your webapp. Therefore, Safari push notification protocol needs 3 components to work together as following figure.</p>
 
 <p><img src="https://github.com/lahiiru/browser-push/raw/gh-pages/handshake_2x.png" alt="Safari-handshake"></p>
 
-<p>In above diagram, pink color box <em>Returns push package</em> needs to be done by our RESTful web service. <em>Push package</em> is a zip file which contains some files and it's hashes. Although Apple developer page instructs to build the <em>Push package</em> dynamically, in our implementation we will create it once and RESTful service will serve it as a static resource.</p>
+<p>In above diagram, pink color box <em>Returns push package</em> needs to be done by our RESTful web service. <strong>Push package</strong> is a zip file which contains some files and it's hashes. Although Apple developer page instructs to build push packeges dynamically, in our implementation we will create it once and RESTful service will serve it as a static resource.</p>
+
+<blockquote>
+<p>If you plan to follow Apple developer instructions strictly, that is fine and it follows good security practices. But, I suggest you to try this first. After you can change the way push packages are created by modifying <code>private void getZip()</code> method in my RESTful service implementation.</p>
+</blockquote>
 </li>
 <li>
 <p>Navigate to <code>back-end/safari_push_package_creator/pushPackage.raw/</code>.<br>
@@ -126,19 +140,36 @@ in <code>back-end/safari_push_package_creator/pushPackage.raw/website.json</code
 Parameter <strong>"webServiceURL"</strong> specifies the path where the Safari RESTful service will be deployed at. <strong>authenticationToken</strong> will be not using to identify users in our implementation. So keep it as it is. Further, you can have your own iconset.</p>
 </blockquote>
 </li>
-<li><p>Set <code>$certificate_path, $certificate_password</code> variables<br>
-in <code>back-end\safari_push_package_creator\index.php</code> to match your <em>.p12</em> certificate.</p></li>
-<li>Run that php file.
-<code>shell
-&gt; php index.php
-</code>
+<li>
+<p>Next, a push package should be created using files in <strong>pushPackage.raw</strong> directory. This happens in following manner.</p>
+
+<ol>
+<li>
+<a href="https://www.w3.org/PICS/DSig/SHA1_1_0.html">SHA1</a> hash values of the files in are calculated.</li>
+<li>Those hash values are put in a file, named <strong>manifest.json</strong>.</li>
+<li>This manifest.json file is signed with the private key in .p12 archive and signature is written as a file named <strong>signature</strong>.</li>
+<li>Finally a zip archive is created with all those files.</li>
+</ol>
+
+<p>This process ensures the integrity of the push package. (changing the content of files by a third party is avoided)</p>
+
+<p>Apple developer site has given a <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/CompanionFile.zip">php script</a> to do that process. I have sightly changed it to cater our need. Do following changes first.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-c">// back-end\safari_push_package_creator\index.php</span></span>
+<span class="pl-s1"><span class="pl-smi">$certificate_path</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>path/to/file/pkey.p12<span class="pl-pds">"</span></span>;         <span class="pl-c">// Change this to the path where your certificate is located.</span></span>
+<span class="pl-s1"><span class="pl-smi">$certificate_password</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>your-certificate-password<span class="pl-pds">"</span></span>; <span class="pl-c">// Change this to the certificate's import password.</span></span></pre></div>
 </li>
-<li>Then a push package for your webapp will be created at following path<br>
-back-end/safari_webservice_backend/binaries/push-package.zip`</li>
-<li>Now make the <code>push-api.war</code> by packaging project <code>safari_webservice_backend</code>.
-<code>shell
-&gt; mvn package
-</code>
+<li>
+<p>Run that index.php file.</p>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">&gt;</span> php index.php</pre></div>
+</li>
+<li><p>Then a push package for your webapp will be created at following path<br>
+<code>back-end/safari_webservice_backend/binaries/push-package.zip</code></p></li>
+<li>
+<p>Now make the <strong>push-api.war</strong> by packaging project <strong>safari_webservice_backend</strong>.</p>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-k">&gt;</span> mvn package</pre></div>
 </li>
 <li>Deploy the <strong>push-api.war</strong> file in Tomcat or other container. After the deployment, <strong>"webServiceURL"</strong> specified in <strong>website.json</strong> should matches the context path of deployed web application.<br>
 If everything works fine, 
