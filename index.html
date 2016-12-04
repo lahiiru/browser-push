@@ -63,7 +63,7 @@
 
 <p><img src="https://github.com/lahiiru/browser-push/raw/gh-pages/pushondesk.png" alt="Push notification"></p>
 
-<p><strong>Mobile push notifications</strong> can be sent from your back-end to some device owner's notification service such as Google's <a href="https://firebase.google.com/docs/cloud-messaging">FCM</a> or Apple's <a href="https://developer.apple.com/notifications">APNS</a>. Whenever the receiver device has the internet connectivity, pending messages are fetched from device owner's notification service and displayed to the user. To do this, your message recipient should have installed a push notification enabled mobile application given by you. <strong>Web push notifications</strong> or browser push notifications are somewhat different. Those are delivered to a web browser. Message recipient should have allowed notifications for your webapp or website by visiting the url from a push notification supported browser. It's the time for sending push notifications to your webapp visitors.</p>
+<p><strong>Mobile push notifications</strong> can be sent from your back-end to some device owner's notification service such as Google's <a href="https://firebase.google.com/docs/cloud-messaging">FCM</a> or Apple's <a href="https://developer.apple.com/notifications">APNS</a>. Whenever the recipient device has the internet connectivity, pending messages are fetched from device owner's notification service and displayed to the user. To do this, your message recipient should have installed a push notification enabled mobile application given by you. <strong>Web push notifications</strong> or browser push notifications are somewhat different. Those are delivered to a web browser. Message recipient should have allowed notifications for your webapp or website by visiting the url from a push notification supported browser. It's the time for sending push notifications to your webapp visitors.</p>
 
 <h2>
 <a id="lets-start" class="anchor" href="#lets-start" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Let's start</h2>
@@ -74,7 +74,7 @@
 <p>Source code: <a href="https://github.com/lahiiru/browser-push">Browser-push</a></p>
 </blockquote>
 
-<p>If you are not willing to send notifications for Safari users, you can skip almost all the steps. Safari doesn't support <a href="https://w3c.github.io/push-api/">Push API</a> which is the W3C standard for web push notification protocol yet. But Chrome, Firefox and Opera latest versions has nicely done that. Therefore, we have to handle Safari separately while othek2r all browsers can be considered as one. Let's say Safari and non-Safari.</p>
+<p>If you are not willing to send notifications to Safari users, you can skip almost all the steps. Still Safari doesn't support <a href="https://w3c.github.io/push-api/">Push API</a> which is the W3C standard for web push notification protocol. But Chrome, Firefox and Opera latest versions has nicely done that. Therefore, we have to handle Safari separately while other all browsers can be considered as one. Let's say Safari and non-Safari.</p>
 
 <hr>
 
@@ -87,7 +87,7 @@
 <a id="guide-lines" class="anchor" href="#guide-lines" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Guide lines</h3>
 
 <ol>
-<li>First you need to generate an <strong>elliptic curve public–private key pair</strong> (a public-key cryptosystems like old RSA). This key pair is for identification of your back-end service which will be used later to send notifications. This identification process is called <a href="https://tools.ietf.org/html/draft-ietf-webpush-vapid-01">VAPID</a>. You can use <code>front-end/keygen.html</code> to generate a key pair. Generate and note down the VAPID keys.</li>
+<li><p>First you need to generate an <strong>elliptic curve public–private key pair</strong> (a public-key cryptosystems like old RSA). This key pair is for identification of your back-end service which will be used later to send notifications. This identification process is called <a href="https://tools.ietf.org/html/draft-ietf-webpush-vapid-01">VAPID</a>. You can use <code>front-end/keygen.html</code> to generate a key pair. Generate and note down the VAPID keys.</p></li>
 <li>
 <p>Put the generated public key in following files as below. <strong>N.B.</strong> File path and name is commented at the top of the code block.</p>
 
@@ -110,10 +110,10 @@ Press <strong>Load Script</strong> button to inject <strong>main.js</strong> scr
 </li>
 </ol>
 
-<p><strong>Following steps are needed for Safari only. If you wish to send notifications for a non-Safari browser, move to <a href="#2-sending-push-notifications-for-subscribed-users">next section</a></strong></p>
+<p><strong>Following steps are needed for Safari only. If you wish to send notifications for a non-Safari browser, move to <a href="#2-sending-push-notifications-to-subscribed-users">next section</a></strong></p>
 
 <ol>
-<li>Create certificates (.p12 and .cer) and a website push id for your domain from Apple developer site. Refer <em>Registering with Apple</em> section in <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/PushNotifications/PushNotifications.html#//apple_ref/doc/uid/TP40013225-CH3-SW33">Configuring Safari Push Notifications</a> article.</li>
+<li><p>Create certificates (.p12 and .cer) and a website push id for your domain from Apple developer site. Refer <em>Registering with Apple</em> section in <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/PushNotifications/PushNotifications.html#//apple_ref/doc/uid/TP40013225-CH3-SW33">Configuring Safari Push Notifications</a> article.</p></li>
 <li>
 <p>Add your website push id which will look like <code>web.com.example</code> to the code as below.</p>
 
@@ -124,7 +124,7 @@ Press <strong>Load Script</strong> button to inject <strong>main.js</strong> scr
 
 <p><img src="https://github.com/lahiiru/browser-push/raw/gh-pages/handshake_2x.png" alt="Safari-handshake"></p>
 
-<p>In above diagram, pink color box <em>Returns push package</em> needs to be done by our RESTful web service. <strong>Push package</strong> is a zip file which contains some files and it's hashes. Although Apple developer page instructs to build push packeges dynamically, in our implementation we will create it once and RESTful service will serve it as a static resource.</p>
+<p>In above diagram, pink color box <em>Returns push package</em> needs to be done by our RESTful web service. <strong>Push package</strong> is a zip file which contains some files and it's hashes. Although Apple developer page instructs to build push packages dynamically, in our implementation we will create it once and RESTful service will serve it as a static resource.</p>
 
 <blockquote>
 <p>If you plan to follow Apple developer instructions strictly, that is fine and it follows good security practices. But, I suggest you to try this first. After you can change the way push packages are created by modifying <code>private void getZip()</code> method in my RESTful service implementation.</p>
@@ -145,17 +145,16 @@ Parameter <strong>"webServiceURL"</strong> specifies the path where the Safari R
 
 <ol>
 <li>
-<a href="https://www.w3.org/PICS/DSig/SHA1_1_0.html">SHA1</a> hash values of the files in are calculated.</li>
+<a href="https://www.w3.org/PICS/DSig/SHA1_1_0.html">SHA1</a> hash values of the files are calculated.</li>
 <li>Those hash values are put in a file, named <strong>manifest.json</strong>.</li>
 <li>This manifest.json file is signed with the private key in .p12 archive and signature is written as a file named <strong>signature</strong>.</li>
 <li>Finally a zip archive is created with all those files.</li>
 </ol>
 
-<p>This process ensures the integrity of the push package. (changing the content of files by a third party is avoided)</p>
+<p>This process ensures the integrity of the push package (changing the content of files by a third party is avoided).
+Apple developer site has given a <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/CompanionFile.zip">php script</a> to do that process. I have sightly changed it to cater our need easily. Do following changes first.</p>
 
-<p>Apple developer site has given a <a href="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/CompanionFile.zip">php script</a> to do that process. I have sightly changed it to cater our need. Do following changes first.</p>
-
-<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-c">// back-end\safari_push_package_creator\index.php</span></span>
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-c">// back-end/safari_push_package_creator/index.php</span></span>
 <span class="pl-s1"><span class="pl-smi">$certificate_path</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>path/to/file/pkey.p12<span class="pl-pds">"</span></span>;         <span class="pl-c">// Change this to the path where your certificate is located.</span></span>
 <span class="pl-s1"><span class="pl-smi">$certificate_password</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>your-certificate-password<span class="pl-pds">"</span></span>; <span class="pl-c">// Change this to the certificate's import password.</span></span></pre></div>
 </li>
@@ -171,8 +170,9 @@ Parameter <strong>"webServiceURL"</strong> specifies the path where the Safari R
 
 <div class="highlight highlight-source-shell"><pre><span class="pl-k">&gt;</span> mvn package</pre></div>
 </li>
-<li>Deploy the <strong>push-api.war</strong> file in Tomcat or other container. After the deployment, <strong>"webServiceURL"</strong> specified in <strong>website.json</strong> should matches the context path of deployed web application.<br>
-If everything works fine, 
+<li>
+<p>Deploy the <strong>push-api.war</strong> file in Tomcat or other container. After the deployment, <strong>"webServiceURL"</strong> specified in <strong>website.json</strong> should matches the context path of deployed web application.<br>
+If everything works fine, </p>
 
 <ul>
 <li>
@@ -182,13 +182,13 @@ If everything works fine,
 <code>http://pushPackages/v1/web.com.example</code> should download zip file <strong>push-package.bin</strong>.</li>
 </ul>
 </li>
-<li>Now you can test Safari push notifications using <code>front-end/index.html</code>.</li>
-<li>A confirmation box should be displayed when <strong>Load script</strong> button is clicked. Otherwise, check developer console outputs. If output is printed with <code>deviceToken=null</code>, this is a problem of your safari RESTful service or created push package. See push-api.war logs for troubleshooting.</li>
+<li><p>Now you can test Safari push notifications using <code>front-end/index.html</code>.</p></li>
+<li><p>A confirmation box should be displayed when <strong>Load Script</strong> button is clicked. Otherwise, check developer console outputs. If output is printed with <code>deviceToken=null</code>, this is a problem of your safari RESTful service or created push package. See push-api.war logs for troubleshooting.</p></li>
 <li>
-<p>If everything works fine, input box with device a should be appeared. Note down it as Safari subscription. It is needed when sending notifications.</p>
+<p>If everything works fine, input box with a token should be appeared. Note it down as Safari subscription. It is needed when sending notifications.</p>
 
 <blockquote>
-<p>In production environment, you should send this subscription to your backen-end and it should be persisted against some user identification. Later your back-end will use that user subscription objects to send push notifications to subscribed users. For demonstration purpose, you can copy it now and hard code in server code.</p>
+<p>In production environment, you should send this subscription to your back-end and it should be persisted against some user identification. Later your back-end will use that user subscription objects to send push notifications to subscribed users. For demonstration purpose, you can copy it now and hard code in server code.</p>
 </blockquote>
 </li>
 </ol>
@@ -211,20 +211,26 @@ If everything works fine,
 <hr>
 
 <h2>
-<a id="2-sending-push-notifications-for-subscribed-users" class="anchor" href="#2-sending-push-notifications-for-subscribed-users" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Sending push notifications for subscribed users</h2>
+<a id="2-sending-push-notifications-to-subscribed-users" class="anchor" href="#2-sending-push-notifications-to-subscribed-users" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Sending push notifications to subscribed users</h2>
 
 <h3>
 <a id="guide-lines-1" class="anchor" href="#guide-lines-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Guide lines</h3>
 
 <ol>
-<li>Navigate to <strong>universal_web_notification_sender</strong> project. Set previously generated (<a href="#guide-lines">in Step 1.1</a>) server keys in <code>PushServerVars.java</code>.</li>
 <li>
-<p>Add your subscriptions in <code>Sender.java</code> as follows.</p>
+<p>Navigate to <strong>universal_web_notification_sender</strong> project. Set previously generated (<a href="#guide-lines">in Step 1.1</a>) server keys as below.</p>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-c">// universal_web_notification_sender/src/main/java/info/wearetrying/PushServerVars.java</span>
+<span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-smi">String</span> <span class="pl-c1">VAPID_PUBLIC_KEY</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>put-the-public-key-here<span class="pl-pds">"</span></span>;
+<span class="pl-k">static</span> <span class="pl-k">final</span> <span class="pl-smi">String</span> <span class="pl-c1">VAPID_PRIVATE_KEY</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>put-the-private-key-here<span class="pl-pds">"</span></span>;</pre></div>
+</li>
+<li>
+<p>Add your subscriptions in <code>Sender.java</code> as below.</p>
 
 <div class="highlight highlight-source-java"><pre><span class="pl-smi">PushSubscription</span> nonSuffariSubscription <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">PushSubscription</span>( <span class="pl-s"><span class="pl-pds">"</span>subscriptionJson<span class="pl-pds">"</span></span> )
 <span class="pl-smi">String</span> suffariSubscription <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>subscriptionToken<span class="pl-pds">"</span></span>;</pre></div>
 </li>
-<li>Sample notification should be delivered to your browser when you run <code>Sender.java</code> class.</li>
+<li><p>Sample notification should be delivered to your browser when you run <code>Sender.java</code> class.</p></li>
 </ol>
 
 <p><strong>If you need to send notifications to Safari browser, following additional steps are needed.</strong></p>
@@ -240,10 +246,10 @@ openssl pkcs12 -export -in apn_developer_identity.pem -inkey private_key_noenc.p
 </code></pre>
 </li>
 <li><p>Place your <strong>apn_developer_identity.p12</strong> in <strong>universal_web_notification_sender</strong> project root.</p></li>
-<li>Change your certificate passkey in <code>private static void sendToSafari()</code> method in <code>Sender.java</code> class.</li>
-<li>Uncomment <code>sendToSafari(safariSubscription, safariPayload);</code> line<br>
-in <code>public static void main(String[] args)</code> method in <code>Sender.java</code> class.</li>
-<li>Sample notification should be delivered to your Safari when you run <code>Sender.java</code> class.</li>
+<li><p>Change your certificate passkey in <code>private static void sendToSafari()</code> method in <code>Sender.java</code> class.</p></li>
+<li><p>Uncomment <code>sendToSafari(safariSubscription, safariPayload);</code> line<br>
+in <code>public static void main(String[] args)</code> method in <code>Sender.java</code> class.</p></li>
+<li><p>Sample notification should be delivered to your Safari when you run <code>Sender.java</code> class.</p></li>
 </ol>
 
 <h3>
