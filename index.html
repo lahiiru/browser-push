@@ -89,7 +89,7 @@
 <ol>
 <li><p>First you need to generate an <strong>elliptic curve public–private key pair</strong> (a public-key cryptosystems like old RSA). This key pair is for identification of your back-end service which will be used later to send notifications. This identification process is called <a href="https://tools.ietf.org/html/draft-ietf-webpush-vapid-01">VAPID</a>. You can use <code>front-end/keygen.html</code> to generate a key pair. Generate and note down the VAPID keys.</p></li>
 <li>
-<p>Put the generated public key in following files as below. <strong>N.B.</strong> File path and name is commented at the top of the code block.</p>
+<p>Put the generated public key in following files as below. <strong>N.B.</strong> File paths and names are commented at the top of each code block.</p>
 
 <div class="highlight highlight-source-js"><pre><span class="pl-c">// front-end/sw.js</span>
 <span class="pl-k">const</span> <span class="pl-c1">applicationServerPublicKey</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;your-generated-public-key&gt;<span class="pl-pds">"</span></span>;</pre></div>
