@@ -53,7 +53,7 @@ public class Sender {
                 safariPayload = "{\"aps\":{\"alert\":{\"title\":\"Flight A998 Now Boarding\",\"body\":\"Boarding has begun for Flight A998.\",\"action\":\"View\"},\"url-args\":[\"https://lahiru.tech/\"]}}";
         // Replace these subscriptions with your valid ones
         PushSubscription
-                nonSuffariSubscription = new PushSubscription( "{\"endpoint\":\"https://fcm.googleapis.com/fcm/send/evcR0WFcVY0:APA91bGxifNfKKeOFJBNY28Bdz2D1hbIZbsvBvORyIPErAZBy1i2uQfDBnzNI7x9IxDkWfF6TAqC37NECy9DbV6PPMxvCnlI72qY26KTC7rSmPLe3DUSSjewIynQBFu7i3nuwUEI16_h\",\"keys\":{\"p256dh\":\"BAKzKIzGWjJNnfjuDFey88_qGZw8rufpvKu9jAkraqzvw5IMybTFgllouJFJ0LnjRUwe-vRV3GYDMq0eZjMlI2Y=\",\"auth\":\"OYBGUshZlBFJz4_Q4-YOQA==\"}}");
+                nonSuffariSubscription = new PushSubscription( "{\"endpoint\":\"https://fcm.googleapis.com/fcm/send/e0pv48gmIzA:APA91bFZTijLzg0fXwQqBC4Eq7XqObpLzypht-C8pHSiewDVpflZkdymdr66XXMJ2h_Nwj6eNSUCks5sl4j0j-dXobItoGkcRt3OL5c4FjKGcE826ntQVGov9qXOetI_VuIYhd3yAAiC\",\"keys\":{\"p256dh\":\"BKOHT5XpWDj-qla-5Z30HBqHDUODZoN6udMjRWZTg1habcm_ZRDqpMMD3CSyuR3yhy5E5Ui-ijxkPaJdwtdRp7g=\",\"auth\":\"n4rq-LKPv9mR8ELhrOpl5g==\"}}");
         String
                 safariSubscription = "D1F415F5FEF4B42879E4AA0AEFD5B0E34D3C1FBA3E73BFE546E4C65E1F552C0B";
 

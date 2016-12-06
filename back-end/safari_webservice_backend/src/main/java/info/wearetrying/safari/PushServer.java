@@ -2,7 +2,6 @@ package info.wearetrying.safari;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -53,7 +52,7 @@ public class PushServer extends HttpServlet {
 			try {
 				log.info("---------| Log request received. "+readBody(req));
 			} catch (Exception e){
-				log.info(e.getMessage());
+				log.info("Error in logging request", e);
 			}
 
 		// webServiceURL/version/any-string
@@ -62,7 +61,7 @@ public class PushServer extends HttpServlet {
 			try {
 				resp.getWriter().write("BAD REQUEST");
 			} catch (IOException e) {
-				log.info(e.getMessage());
+				log.info("Error in the request", e);
 			}
 		}
 	}
@@ -112,12 +111,13 @@ public class PushServer extends HttpServlet {
 		String fileName = "binaries/push-package.zip";
 		response.setContentType("application/zip");
 		response.setHeader("Content-Disposition","attachment;filename=\"push-package.bin\"");
+		FileInputStream is = null;
 		try{
 			File f = new File(fileName);
 			int length = (int)f.length();
 			byte[] arBytes = new byte[length];
 			response.setContentLength(length);
-			FileInputStream is = new FileInputStream(f);
+			is = new FileInputStream(f);
 			is.read(arBytes);
 			is.close();
 			ServletOutputStream op = response.getOutputStream();
@@ -126,6 +126,14 @@ public class PushServer extends HttpServlet {
 		}catch(IOException ioe)
 		{
 			log.info("Error while loading" + fileName + "zip",ioe);
+		}finally {
+			try {
+				if(is!=null){
+					is.close();
+				}
+			} catch (IOException e) {
+				log.info("Error while closing stream " + fileName + "zip", e);
+			}
 		}
 	}
 }

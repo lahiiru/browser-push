@@ -5,7 +5,7 @@
  */
 /* eslint-disable max-len */
 
-const applicationServerPublicKey = '<paste-generated-public-key-here>';
+const applicationServerPublicKey = 'BHJbjjDO-6F-eXTqtVVu_aHZ_yssYATwe-3bU8pqXwe8Xik0lkq6LI9rOojUbVqh46GQrxoObj4A4zv_T9hBpZ0';
 
 /* eslint-enable max-len */
 
