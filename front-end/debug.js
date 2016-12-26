@@ -51,7 +51,6 @@ function nonSafariCheck(){
 	} else {
 		alert("Permission state is: " + Notification.permission);
 	}
-	alert("Permission state is: " + );
 }
 
 /*
