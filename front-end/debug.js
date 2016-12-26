@@ -14,17 +14,17 @@ console.log('%c WebPush debug script injected.', 'background: green; color: whit
  /*
   * dummy function which contains the code you need to paste in developer console in browser.
   */
-injectScript(){
+function injectScript(){
 	    (
            function (a,b,c,d) {
              b.type= c;
              b.src= d;
              a.appendChild(b);
        })
-       (document.getElementsByTagName('head')[0], document.createElement('script'), 'text/javascript', 'https://raw.githubusercontent.com/lahiiru/browser-push/master/front-end/debug.js');
+       (document.getElementsByTagName('head')[0], document.createElement('script'), 'text/javascript', 'https://cdn.rawgit.com/lahiiru/browser-push/master/front-end/debug.js');
 }
 
-safariCheck(){
+function safariCheck(){
 	var domain = prompt("Enter website id to check (e.g. web.com.example)","");
 	var perm = window.safari.pushNotification.permission(domain);
 	if (perm.permission == 'granted'){
@@ -36,7 +36,7 @@ safariCheck(){
 	}
 }
 
-nonSafariCheck(){
+function nonSafariCheck(){
 	if(Notification.permission == 'granted'){
 		navigator.serviceWorker.getRegistration().then(function(s){
 			s.pushManager.getSubscription().then(function(ss){
