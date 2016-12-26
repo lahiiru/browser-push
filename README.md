@@ -21,13 +21,19 @@ If you wish to present what you learnt from above tutorial, [this presentation](
 
 Paste following code in your browser developer console after navigating to your push configured webapp. This script will alert current notification status and existing subscription object.
 
-	    (
+```javascript
+        (
            function (a,b,c,d) {
              b.type= c;
              b.src= d;
              a.appendChild(b);
        })
-       (document.getElementsByTagName('head')[0], document.createElement('script'), 'text/javascript', 'https://rawgit.com/lahiiru/browser-push/master/front-end/debug.js');
-       
+        (
+	    document.getElementsByTagName('head')[0], 
+            document.createElement('script'), 
+	    'text/javascript', 
+	    'https://rawgit.com/lahiiru/browser-push/master/front-end/debug.js'
+        );
+```
 ---
 lahiiru@gmail.com
