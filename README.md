@@ -29,10 +29,10 @@ Paste following code in your browser developer console after navigating to your 
              a.appendChild(b);
        })
         (
-	    document.getElementsByTagName('head')[0], 
-            document.createElement('script'), 
-	    'text/javascript', 
-	    'https://rawgit.com/lahiiru/browser-push/master/front-end/debug.js'
+           document.getElementsByTagName('head')[0], 
+           document.createElement('script'), 
+           'text/javascript', 
+           'https://rawgit.com/lahiiru/browser-push/master/front-end/debug.js'
         );
 ```
 ---
