@@ -115,7 +115,7 @@ $certificate_password = "your-certificate-password"; // Change this to the certi
 8. Deploy the **push-api.war** file in Tomcat or other container. After the deployment, **"webServiceURL"** specified in **website.json** should matches the context path of deployed web application.    
 If everything works fine, 
     * `http://webServiceURL/v1/` should response with **BAD REQUEST**
-    * `http://pushPackages/v1/web.com.example` should download zip file **push-package.bin**.
+    * `http://webServiceURL/v1/pushPackages/web.com.example` should download zip file **push-package.bin**.
 
 9. Now you can test Safari push notifications using `front-end/index.html`.
 
