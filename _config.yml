@@ -6,5 +6,5 @@ theme: jekyll-theme-leap-day
 
 gems:
   - jekyll-mentions
-
+include: ["INDEX.md"]
 exclude: ["README.md"]
