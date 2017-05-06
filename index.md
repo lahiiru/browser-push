@@ -156,7 +156,7 @@ If everything works fine,
     String suffariSubscription = "subscriptionToken";
     ```
 
-3. Sample notification should be delivered to your browser when you run `Sender.java` class. (If you couldn't run the java class please refer [Google](https://www.google.lk/search?q=how+to+run+maven+java+project+intellij)).
+3. Sample notification should be delivered to your browser when you run `Sender.java` class. (If you couldn't run the java class please refer [Google](https://www.google.lk/search?q=how+to+run+maven+java+project+intellij)) on how to configure and run maven java project.
 
 **If you need to send notifications to Safari browser, following additional steps are needed.**
 
