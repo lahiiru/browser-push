@@ -17,7 +17,7 @@ This repository contains and explains necessary steps to configure web push noti
 
 Visit Github page [Browser-push](https://lahiiru.github.io/browser-push) for guide lines.
 
-*(This tutorial is for technical peoples. **Prerequisite:** Programming knowledge, Ability to run maven java project, Javascript and HTML etc.)*
+*(This tutorial is for technical people. **Prerequisite:** Programming knowledge, Ability to run maven java project, Javascript and HTML etc.)*
 
 ## Presentation
 
