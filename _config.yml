@@ -1,8 +1,9 @@
 title: Browser Push
 description: Complete workout and guide lines to add web push notifications support for your webapp
+production_url : http://lahiiru.github.io/browser-push
 google_analytics: 
 show_downloads: true
 theme: jekyll-theme-leap-day
-
-gems:
-  - jekyll-mentions
+markdown: kramdown
+JB :
+  version : 0.3.0
