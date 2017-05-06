@@ -39,12 +39,12 @@ Open the project in IntelliJ IDEA.
 
     ```javascript
     // front-end/sw.js
-    const applicationServerPublicKey = \"<your-generated-public-key>\";
+    const applicationServerPublicKey = "<your-generated-public-key>";
     ```
 
     ```javascript
     // front-end/main.js
-    const applicationServerPublicKey = \"<your-generated-public-key>\";
+    const applicationServerPublicKey = "<your-generated-public-key>";
     ```
 
 
@@ -65,7 +65,7 @@ Press **Load Script** button to inject **main.js** script. (instead, you can sim
 
     ```javascript
     // front-end/main.js
-    var domain = \"web.com.example\";
+    var domain = "web.com.example";
     ```
 
     Then you need to setup a RESTful web service which will be called every time some Safari user is trying to subscribe for your webapp. Therefore, Safari push notification protocol needs 3 components to work together as following figure.
@@ -79,9 +79,9 @@ Press **Load Script** button to inject **main.js** script. (instead, you can sim
 3. Navigate to `back-end/safari_push_package_creator/pushPackage.raw/`.    
 Modify the files as you needed. Please refer the *Building the Push Package* section in [Configuring Safari Push Notifications](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/NotificationProgrammingGuideForWebsites/PushNotifications/PushNotifications.html#//apple_ref/doc/uid/TP40013225-CH3-SW7) article.
 
-    > If you are planing to add Safari push notification support to multiple domain names, specify those as **\"allowedDomains\"**    
+    > If you are planing to add Safari push notification support to multiple domain names, specify those as **"allowedDomains"**    
 in `back-end/safari_push_package_creator/pushPackage.raw/website.json`.    
-Parameter **\"webServiceURL\"** specifies the path where the Safari RESTful service will be deployed at. **authenticationToken** will be not using to identify users in our implementation. So keep it as it is. Further, you can have your own iconset.
+Parameter **"webServiceURL"** specifies the path where the Safari RESTful service will be deployed at. **authenticationToken** will be not using to identify users in our implementation. So keep it as it is. Further, you can have your own iconset.
 
 4. Next, a push package should be created using files in **pushPackage.raw** directory. This happens in following manner.
     1. [SHA1](https://www.w3.org/PICS/DSig/SHA1_1_0.html) hash values of the files are calculated.
