@@ -94,8 +94,8 @@ Parameter **"webServiceURL"** specifies the path where the Safari RESTful servic
 
     ```php
     // back-end/safari_push_package_creator/index.php
-    $certificate_path = \"path/to/file/pkey.p12\";         // Change this to the path where your certificate is located.
-    $certificate_password = \"your-certificate-password\"; // Change this to the certificate's import password.
+    $certificate_path = "path/to/file/pkey.p12";         // Change this to the path where your certificate is located.
+    $certificate_password = "your-certificate-password"; // Change this to the certificate's import password.
     ```
    
 5. Run that index.php file.
@@ -112,7 +112,7 @@ Parameter **"webServiceURL"** specifies the path where the Safari RESTful servic
     > mvn package
     ```
 
-8. Deploy the **push-api.war** file in Tomcat or other container. After the deployment, **\"webServiceURL\"** specified in **website.json** should matches the context path of deployed web application.    
+8. Deploy the **push-api.war** file in Tomcat or other container. After the deployment, **"webServiceURL"** specified in **website.json** should matches the context path of deployed web application.    
 If everything works fine, 
     * `http://webServiceURL/v1/` should response with **BAD REQUEST**
     * `http://pushPackages/v1/web.com.example` should download zip file **push-package.bin**.
@@ -145,18 +145,18 @@ If everything works fine,
 
     ```java
     // universal_web_notification_sender/src/main/java/info/wearetrying/PushServerVars.java
-    static final String VAPID_PUBLIC_KEY = \"put-the-public-key-here\";
-    static final String VAPID_PRIVATE_KEY = \"put-the-private-key-here\";
+    static final String VAPID_PUBLIC_KEY = "put-the-public-key-here";
+    static final String VAPID_PRIVATE_KEY = "put-the-private-key-here";
     ```
 
-2. Add your subscriptions in `Sender.java` as below.
+2. Add your subscriptions in `Sender.java` as below. (If you don't remember what is called subscription, those are the strings obtained in above steps 1.4 and 1.11)
 
     ```java
-    PushSubscription nonSuffariSubscription = new PushSubscription( \"subscriptionJson\" )
-    String suffariSubscription = \"subscriptionToken\";
+    PushSubscription nonSuffariSubscription = new PushSubscription( "subscriptionJson" )
+    String suffariSubscription = "subscriptionToken";
     ```
 
-3. Sample notification should be delivered to your browser when you run `Sender.java` class.
+3. Sample notification should be delivered to your browser when you run `Sender.java` class. (If you couldn't run the java class please refer [Google](https://www.google.lk/search?q=how+to+run+maven+java+project+intellij)).
 
 **If you need to send notifications to Safari browser, following additional steps are needed.**
 
@@ -165,7 +165,7 @@ If everything works fine,
     ```dos
     openssl x509 -in apn_developer_identity.cer -inform DER -out apn_developer_identity.pem -outform PEM}
     openssl rsa -out private_key_noenc.pem -in private_dev_key.pem
-    openssl pkcs12 -export -in apn_developer_identity.pem -inkey private_key_noenc.pem -certfile CertificateSigningRequest.certSigningRequest -name \"apn_developer_identity\" -out apn_developer_identity.p12
+    openssl pkcs12 -export -in apn_developer_identity.pem -inkey private_key_noenc.pem -certfile CertificateSigningRequest.certSigningRequest -name "apn_developer_identity" -out apn_developer_identity.p12
     ```
 
 2. Place your **apn_developer_identity.p12** in **universal_web_notification_sender** project root.
