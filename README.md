@@ -6,12 +6,14 @@ You are welcome to open issues if you have questions or want help regarding web 
 
 ## Introduction
 
-This repository contains and explains necessary steps to configure web push notifications for your webapp on Safari and [Push API](https://w3c.github.io/push-api/) supported browsers as listed below:
+This repository contains and explains all the necessary steps to configure web push notifications for your webapp on Safari and [Push API](https://w3c.github.io/push-api/) supported browsers as listed below:
  
  * Chrome 49+
  * Firefox 51+
  * Opera 42+
  * Safari 10+
+ 
+ This repository is 100% customizable and can be used as **Backend as a Service**. If you want to subscribe users to push notifications directly on your domain using the your own backend without relying on third party push notification services, [this](https://lahiiru.github.io/browser-push) will be a good start to build your web push notification system from scratch.
  
 ## Tutorial
 
