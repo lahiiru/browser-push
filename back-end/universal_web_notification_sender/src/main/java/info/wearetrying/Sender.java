@@ -27,7 +27,7 @@ public class Sender {
         Notification notification = new Notification(endpoint,publicKey , auth, payload);
         // Construct push service
         PushService pushService = new PushService();
-        pushService.setSubject("mailto:adm.trine@gmail.com");
+        pushService.setSubject("mailto:lahiiru@gmail.com");
         pushService.setPublicKey(Utils.loadPublicKey(PushServerVars.VAPID_PUBLIC_KEY));
         pushService.setPrivateKey(Utils.loadPrivateKey(PushServerVars.VAPID_PRIVATE_KEY));
         // Send notification!
